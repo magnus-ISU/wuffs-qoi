@@ -28,9 +28,12 @@ void *qoi_read(const char *filename, qoi_desc *desc, uint8_t channels) {
 	fclose(f);
 
 	// TODO make this actually call wuffs code
-	wuffs_qoi_read_header(data, size_data, desc, sizeof(*desc));
+	wuffs_qoi_read_header(data, size_data);
 
-	if (0 == channels) {
+	// TODO do this
+	//*desc = wuffs_qoi_header();
+
+	if (3 != channels && 4 != channels) {
 		channels = desc->channels;
 	}
 
@@ -44,7 +47,7 @@ void *qoi_read(const char *filename, qoi_desc *desc, uint8_t channels) {
 	}
 
 	// TODO make this actually call wuffs code
-	wuffs_qoi_decode(data, size_data, channels);
+	wuffs_qoi_decode(data, size_data, pixels, size_pixels, channels);
 	QOI_FREE(data);
 
 	return pixels;

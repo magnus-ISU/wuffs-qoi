@@ -33,14 +33,14 @@ pub struct decoder? implements base.image_decoder(
 	previously_seen : array[64] qoi.pixel,
 )
 
-pub func decoder.read_header?(data: base.io_reader, dest: ptr qoi.header) {
-
+pub func decoder.read_header?(data: base.io_reader) {
+	return "#Incorrect header"
 }
 
 pub func decoder.header() {
 	return this.header
 }
 
-pub func decoder.decode_RGB?(data: base.io_reader, dest: nptr base.u8, channels: base.u8[3 ..= 4]) {
-
+pub func decoder.decode?(data: base.io_reader, dest: ptr base.u8, channels: base.u8[3 ..= 4]) {
+	return
 }
