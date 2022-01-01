@@ -19,27 +19,34 @@ pub struct pixel(
 	a : base.u32,
 )
 
+// TODO unsure if this should exist or if we should just use whatever read_image_config does
 pub struct header(
 	width      : base.u32,
 	height     : base.u32,
-	channels   : base.u8[3 ..= 4],
+	channels   : base.u8[0 ..= 4],
+// TODO if this should exist, how do we restrict to a range that doesn't start with 0?
+//	channels   : base.u8[3 ..= 4],
 	colorspace : base.u8[0 ..= 1],
 )
 
-pub struct decoder? implements base.image_decoder(
-	header          : qoi.header,
+//pub struct decoder? implements base.image_decoder(
+pub struct decoder?(
+	// TODO won't compile: Cannot write the 0 value of type header?
+	//head            : header,
 	current_run     : base.u8[0 ..= 62],
-	previously_seen : array[64] qoi.pixel,
+	previously_seen : array[64] pixel,
 )
 
+// TODO seems to be read_image_config that should be used
 pub func decoder.read_header?(data: base.io_reader) {
 	return "#Incorrect header"
 }
 
-pub func decoder.header() {
-	return this.header
-}
+// TODO unsure if this should exist or if we should just use whatever read_image_config does
+//pub func decoder.header() header {
+	//return this.head
+//}
 
+// TODO dunno what to use
 pub func decoder.decode?(data: base.io_reader, dest: ptr base.u8, channels: base.u8[3 ..= 4]) {
-	return this.header
 }
