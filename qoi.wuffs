@@ -1,36 +1,36 @@
 pub status "#Incorrect header"
 
-pri const HEADER_MAGIC: base.u32 = 'qoif';
-pri const QOI_PADDING: array[8] base.u8 = [0, 0, 0, 0, 0, 0, 0, 1]
+pri const HEADER_MAGIC : base.u32 = 'qoif'le
+pri const QOI_PADDING  : array[8] base.u8 = [0, 0, 0, 0, 0, 0, 0, 1]
 
-pri const QOI_OP_INDEX: base.u8  0x00 /* 00xxxxxx */
-pri const QOI_OP_DIFF: base.u8   0x40 /* 01xxxxxx */
-pri const QOI_OP_LUMA: base.u8   0x80 /* 10xxxxxx */
-pri const QOI_OP_RUN: base.u8    0xc0 /* 11xxxxxx */
-pri const QOI_OP_RGB: base.u8    0xfe /* 11111110 */
-pri const QOI_OP_RGBA: base.u8   0xff /* 11111111 */
+pri const QOI_OP_INDEX : base.u8 = 0b0000_0000
+pri const QOI_OP_DIFF  : base.u8 = 0b0100_0000
+pri const QOI_OP_LUMA  : base.u8 = 0b1000_0000
+pri const QOI_OP_RUN   : base.u8 = 0b1100_0000
+pri const QOI_OP_RGB   : base.u8 = 0b1111_1110
+pri const QOI_OP_RGBA  : base.u8 = 0b1111_1111
 
-pri const QOI_MASK_2: base.u8    0xc0 /* 11000000 */
+pri const QOI_MASK_2 : base.u8 = 0b1100_0000
 
-pub struct qoi_pixel (
-	r: base.u32,
-	g: base.u32,
-	b: base.u32,
-) (
-	a: base.u32,
+pub struct qoi_pixel(
+	r : base.u32,
+	g : base.u32,
+	b : base.u32,
+)(
+	a : base.u32,
 )
 
-pub struct header (
-	width: base.u32,
-	height: base.u32,
-	channels: base.u8[3 ..= 4],
-	colorspace: base.u8[0 ..= 1],
+pub struct header(
+	width      : base.u32,
+	height     : base.u32,
+	channels   : base.u8[3 ..= 4],
+	colorspace : base.u8[0 ..= 1],
 )
 
-pub struct decoder? implements base.image_decoder (
-	header: qoi.qoi_header,
-	current_run: ase.u8[0 ..= 62],
-	previously_seen: array[64] qoi_pixel
+pub struct decoder? implements base.image_decoder(
+	header          : qoi.qoi_header,
+	current_run     : base.u8[0 ..= 62],
+	previously_seen : array[64] qoi.pixel,
 )
 
 pub func decoder.read_header?(data: base.io_reader, dest: ptr qoi.header) {
