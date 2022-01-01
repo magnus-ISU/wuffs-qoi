@@ -16,7 +16,6 @@ pub struct pixel(
 	r : base.u32,
 	g : base.u32,
 	b : base.u32,
-)(
 	a : base.u32,
 )
 
