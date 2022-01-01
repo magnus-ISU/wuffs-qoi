@@ -41,5 +41,5 @@ pub func decoder.header() {
 }
 
 pub func decoder.decode?(data: base.io_reader, dest: ptr base.u8, channels: base.u8[3 ..= 4]) {
-	return
+	return this.header
 }
