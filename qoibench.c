@@ -38,10 +38,10 @@ SOFTWARE.
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_ONLY_PNG
 #define STBI_NO_LINEAR
-#include "stb_image.h"
+#include "stb/stb_image.h"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
+#include "stb/stb_image_write.h"
 
 #define QOI_IMPLEMENTATION
 #include "qoi.h"
@@ -355,7 +355,7 @@ void benchmark_print_result(benchmark_result_t res) {
 	res.qoi.size /= res.count;
 
 	double px = res.px;
-	printf("        decode ms   encode ms   decode mpps   encode mpps   size kb    rate\n");
+	printf("        decode ms   encode ms   decode mpps   encode mpps   size kb    Compression rate\n");
 	if (!opt_nopng) {
 		printf(
 			"libpng:  %8.1f    %8.1f      %8.2f      %8.2f  %8d   %4.1f%%\n", 
