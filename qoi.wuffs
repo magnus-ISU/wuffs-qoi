@@ -12,7 +12,7 @@ pri const QOI_OP_RGBA  : base.u8 = 0b1111_1111
 
 pri const QOI_MASK_2 : base.u8 = 0b1100_0000
 
-pub struct qoi_pixel(
+pub struct pixel(
 	r : base.u32,
 	g : base.u32,
 	b : base.u32,
